@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"github.com/byron/gola"
+	"github.com/xrash/smetrics"
 	"os"
 )
 
@@ -13,4 +14,13 @@ func main() {
 	}
 
 	fmt.Println(string.Reverse(os.Args[1]))
+	s := smetrics.Jaro(os.Args[1], "Hello, World")
+	switch {
+	case s == 1.0:
+		fmt.Println("BULLSEYE!")
+	case s > 0.8:
+		fmt.Println("Getting warmer")
+	default:
+		fmt.Println("Cold ...")
+	}
 }
